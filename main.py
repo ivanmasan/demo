@@ -66,8 +66,8 @@ pred_valid_y = y_transformer.inverse_transform(pred_valid_y)
 pred_train_y = model.predict(train_X).reshape(-1, 1)
 pred_train_y = y_transformer.inverse_transform(pred_train_y)
 
-valid_loss = np.sqrt(((pred_valid_y - valid_y) ** 2).sum())
-train_loss = np.sqrt(((pred_train_y - train_y) ** 2).sum())
+valid_loss = np.sqrt(((pred_valid_y - valid_y) ** 2).mean())
+train_loss = np.sqrt(((pred_train_y - train_y) ** 2).mean())
 
 logger = Logger.current_logger()
 

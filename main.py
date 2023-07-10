@@ -56,14 +56,14 @@ transformed_train_y = y_transformer.fit_transform(train_y)
 
 valid_X = X_transformer.transform(valid_X)
 
-model = Lasso(alpha=task.get_parameter(name="Args/alpha", default=1))
+model = Lasso(alpha=1)
 
 model.fit(train_X, transformed_train_y)
 
-pred_valid_y = model.predict(valid_X)
+pred_valid_y = model.predict(valid_X).reshape(-1, 1)
 pred_valid_y = y_transformer.inverse_transform(pred_valid_y)
 
-pred_train_y = model.predict(train_X)
+pred_train_y = model.predict(train_X).reshape(-1, 1)
 pred_train_y = y_transformer.inverse_transform(pred_train_y)
 
 valid_loss = np.sqrt(((pred_valid_y - valid_y) ** 2).sum())
